@@ -14,8 +14,8 @@ xproc VBlank
 	rti
 .endproc
 
-xproc Start
-	setA8
+xproc EntryPoint
+	setA16
 	setI8
 	jsr snes_init
 

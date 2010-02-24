@@ -54,6 +54,6 @@
 .word $00		; Unused
 .word EmptyHandler	; ABORT_EMULATED_HANDLER
 .word EmptyHandler	; NMI_EMULATED_HANDLER
-.word Start		; RESET_EMULATED_HANDLER
+.word EntryPoint	; RESET_EMULATED_HANDLER
 .word EmptyHandler	; IRQBRK_EMULATED_HANDLER
 
