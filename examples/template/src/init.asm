@@ -92,6 +92,4 @@ actual_init:
 	stz 	$420D	  ; Access cycle designation (slow/fast rom)
 	cli 	 	      ; Enable interrupts
 	rts
-  
-  jmp Start
 .ends
