@@ -1,0 +1,5 @@
+[objects]
+build/main.lib
+
+[libraries]
+bank 0 slot 0 build/init.lib
