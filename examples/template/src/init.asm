@@ -1,5 +1,12 @@
 .section "_init" FREE
 actual_init:
+  sei        ; Disabled interrupts
+  clc        ; clear carry to switch to native mode
+  xce        ; Xchange carry & emulation bit. native mode
+  rep #$18   ; Binary mode (decimal mode off), X/Y 16 bit
+  ldx #$1FFF ; set stack to $1FFF
+  txs
+  
 	sep 	#$30    ; X,Y,A are 8 bit numbers
 	lda 	#$8F    ; screen off, full brightness
 	sta 	$2100   ; brightness + screen enable register 
@@ -82,7 +89,9 @@ actual_init:
 	stz 	$420A   ; Vertical Count Timer MSB
 	stz 	$420B   ; General DMA enable (bits 0-7)
 	stz 	$420C   ; Horizontal DMA (HDMA) enable (bits 0-7)
-	stz 	$420D	; Access cycle designation (slow/fast rom)
-	cli 	 	; Enable interrupts
+	stz 	$420D	  ; Access cycle designation (slow/fast rom)
+	cli 	 	      ; Enable interrupts
 	rts
+  
+  jmp Start
 .ends

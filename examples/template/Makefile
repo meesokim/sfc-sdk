@@ -8,7 +8,7 @@ TOOLCHAIN    := ../toolchain
 AS           := $(TOOLCHAIN)/wla-65816
 ASFLAGS      := -l
 LD           := $(TOOLCHAIN)/wlalink
-LDFLAGS      := -vr
+LDFLAGS      := -r
 PREPROCESSOR := cpp
 
 PROJECT  := template

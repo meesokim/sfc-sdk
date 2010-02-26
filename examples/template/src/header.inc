@@ -34,18 +34,18 @@
 .ENDSNES
  
 .SNESNATIVEVECTOR               ; Define Native Mode interrupt vector table
-  COP EmptyHandler
-  BRK EmptyHandler
+  COP   EmptyHandler
+  BRK   EmptyHandler
   ABORT EmptyHandler
-  NMI EmptyHandler
-  IRQ EmptyHandler
+  NMI   EmptyHandler
+  IRQ   EmptyHandler
 .ENDNATIVEVECTOR
  
 .SNESEMUVECTOR                  ; Define Emulation Mode interrupt vector table
-  COP EmptyHandler
-  ABORT EmptyHandler
-  NMI EmptyHandler
-  RESET Start
+  COP    EmptyHandler
+  ABORT  EmptyHandler
+  NMI    EmptyHandler
+  RESET  actual_init
   IRQBRK EmptyHandler
 .ENDEMUVECTOR
  
@@ -59,16 +59,6 @@ EmptyHandler:
  
 .EMPTYFILL $00
 ;---------------------------------- END -------------------------------------
-
-.MACRO init
-  sei        ; Disabled interrupts
-  clc        ; clear carry to switch to native mode
-  xce        ; Xchange carry & emulation bit. native mode
-  rep #$18   ; Binary mode (decimal mode off), X/Y 16 bit
-  ldx #$1FFF ; set stack to $1FFF
-  txs
-  jsr actual_init
-.ENDM
 
 .bank 0
 .section "MainCode" SEMIFREE
