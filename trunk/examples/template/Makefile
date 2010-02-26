@@ -17,7 +17,8 @@ LIBFILES := $(ASMFILES:.asm=.lib)
 
 # Build rules.
 $(PROJECT).sfc : $(patsubst %,$(BUILD)/%, $(LIBFILES))
-	@rm -rf temp.asm
+#	@rm -rf temp.asm
+	del /F temp.asm
 	@echo "linking $(PROJECT).sfc.."
 	@$(LD) $(LDFLAGS) $(PROJECT).link $(PROJECT).sfc
 
@@ -32,4 +33,5 @@ $(BUILD)/%.lib : %.asm
 	@$(AS) $(ASFLAGS) temp.asm $@
 
 clean :
-	@rm -rf $(BUILD)/*
+#	@rm -rf $(BUILD)/*
+	del /F $(BUILD)
