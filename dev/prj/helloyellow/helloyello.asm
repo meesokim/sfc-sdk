@@ -1,5 +1,5 @@
-include("std/basic.inc")
-include("std/headerlo.inc")
+include(std/basic.inc)
+include(std/headerlo.inc)
 
 .BANK 0 SLOT 0      ; Defines the ROM bank and the slot it is inserted in memory.
 .ORG 0              ; .ORG 0 is really $8000, because the slot starts at $8000
@@ -14,8 +14,11 @@ EmptyHandler:
 
 ; Reset vector entry point.
 xproc(Start)
-	;sep     #$20        ; Set the A register to 8-bit.
-	;.accu 8
+	setA16
+	setI8
+	
+	STD_INITSYSTEM
+	
 	setA8
 	lda     #%10000000  ; Force VBlank by turning off the screen.
 	sta     $2100
